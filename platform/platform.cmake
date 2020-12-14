@@ -1,0 +1,22 @@
+include(autogen.cmake)
+
+if ("${CMAKE_TOOLCHAIN_FILE}" STREQUAL "")
+    message(STATUS "Toolchain files directory is not set")
+endif()
+include(${CMAKE_TOOLCHAIN_FILE})
+
+set(CMAKE_DEVICE_PATH ${CMAKE_SOURCE_DIR}/platform/Device/${MICROBYTE_DEVICE}/${MICROBYTE_DEVICE}.cmake)
+if (EXISTS ${CMAKE_DEVICE_PATH})
+    include(${CMAKE_DEVICE_PATH})
+    message(STATUS "CMake file found for Device in ${CMAKE_DEVICE_PATH}")
+else()
+    message(STATUS "NO CMake file found for Device in ${CMAKE_DEVICE_PATH}")
+endif()
+
+set(CMAKE_SDK_PATH ${CMAKE_SOURCE_DIR}/platform/SDK/${MICROBYTE_SDK}/${MICROBYTE_SDK}.cmake)
+if (EXISTS ${CMAKE_SDK_PATH})
+    include(${CMAKE_SDK_PATH})
+    message(STATUS "CMake file found for SDK in ${CMAKE_SDK_PATH}")
+else()
+    message(STATUS "NO CMake file found for SDK in ${CMAKE_SDK_PATH}")
+endif()

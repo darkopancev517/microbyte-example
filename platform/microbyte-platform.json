@@ -1,0 +1,26 @@
+{
+  "microbyte_stm32f407": {
+    "device": {
+      "name": "STM32F407VG"
+    },
+    "os": {
+      "name": "microbyte-dal",
+      "version": "0.1"
+    },
+    "sdk": {
+      "name": "microbyte_stm32f407",
+      "version": "0.1"
+    },
+    "middleware": {
+      "microbyte-dal": {
+        "version": "0.1",
+        "from": {
+          "protocol": "git",
+          "location": "https://github.com/darkopancev517/microbyte-dal.git",
+          "tag": "microbyte-dal-v0.1"
+        },
+        "to": "SDK/microbyte_stm32f407/microbyte-dal"
+      }
+    }
+  }
+}
