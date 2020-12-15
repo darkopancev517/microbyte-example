@@ -1,4 +1,5 @@
-#include "mbed.h"
+#include "cmsis.h"
+#include "device.h"
 
 extern uint32_t _sfixed;
 extern uint32_t _efixed;

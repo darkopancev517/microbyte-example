@@ -5,7 +5,7 @@
     },
     "os": {
       "name": "microbyte-dal",
-      "version": "0.2"
+      "version": "0.3"
     },
     "sdk": {
       "name": "microbyte_stm32f407",
@@ -13,11 +13,11 @@
     },
     "middleware": {
       "microbyte-dal": {
-        "version": "0.2",
+        "version": "0.3",
         "from": {
           "protocol": "git",
           "location": "https://github.com/darkopancev517/microbyte-dal.git",
-          "tag": "microbyte-dal-v0.2"
+          "tag": "microbyte-dal-v0.3"
         },
         "to": "SDK/microbyte_stm32f407/microbyte-dal"
       }

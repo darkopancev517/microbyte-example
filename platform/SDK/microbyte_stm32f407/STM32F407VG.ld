@@ -9,7 +9,7 @@ MEMORY
 {
     rom (rx)    : ORIGIN = 0x00000000, LENGTH = 1024K
     ccm (w!rx)  : ORIGIN = 0x10000000, LENGTH = 64K
-    ram (w!rx)  : ORIGIN = 0x20000188, LENGTH = 128K - 0x188
+    ram (w!rx)  : ORIGIN = 0x20000188, LENGTH = 128k - 0x188
 }
 
 /* Section Definitions */
