@@ -4,10 +4,10 @@ DigitalOut led(PA_3);
 
 int main()
 {
+    led.write(1);
+
     while (1)
     {
-        led = !led;
-        wait(0.2);
     }
 
     return 0;
