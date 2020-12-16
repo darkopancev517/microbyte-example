@@ -150,8 +150,8 @@ set(MbedClassic_SRCS
 )
 
 set(Board_SRCS
-    ${CMAKE_CURRENT_SOURCE_DIR}/isr_stm32f407vg.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/startup_stm32f407vg.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/startup_stm32f407xx.S
+    ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
 )
 
 set(PLATFORM_LIBS_SRCS
@@ -159,7 +159,9 @@ set(PLATFORM_LIBS_SRCS
 )
 
 add_definitions(-DMICROBYTE_PROJECT_CONFIG_FILE="MicroByteProjectConfig.h")
-add_definitions(-DHSE_VALUE=16000000)
+add_definitions(-DTOOLCHAIN_GCC)
+add_definitions(-DTOOLCHAIN_GCC_ARM)
+add_definitions(-DMBED_OPERATORS)
 
 add_library(MbedClassic STATIC ${MbedClassic_SRCS})
 add_library(Board STATIC ${Board_SRCS})

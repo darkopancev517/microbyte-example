@@ -19,7 +19,9 @@ FILE(GLOB MICROBYTE_EXAMPLE_SRCS
 )
 
 add_definitions(-DMICROBYTE_PROJECT_CONFIG_FILE="MicroByteProjectConfig.h")
-add_definitions(-DHSE_VALUE=16000000)
+add_definitions(-DTOOLCHAIN_GCC)
+add_definitions(-DTOOLCHAIN_GCC_ARM)
+add_definitions(-DMBED_OPERATORS)
 
 CREATE_TEST_LIBRARY(microbyte_example "${MICROBYTE_EXAMPLE_SRCS}" "")
 add_dependencies(microbyte_example PLATFORM_LIBS)
