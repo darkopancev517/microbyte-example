@@ -20,7 +20,7 @@ void *thread1(void *)
 
 int main()
 {
-    _mutex = MicroByteMutex(MICROBYTE_MUTEX_LOCKED);
+    _mutex = MicroByteMutex();
 
     MicroByteThread::init(thread1Stack, sizeof(thread1Stack),
             MICROBYTE_THREAD_PRIORITY_MAIN - 1,
