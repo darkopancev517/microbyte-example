@@ -154,7 +154,7 @@ set(Board_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/startup_stm32f407xx.S
     ${CMAKE_CURRENT_SOURCE_DIR}/MicroByteDevice.cpp
     ${CMAKE_CURRENT_SOURCE_DIR}/mbed_boot_gcc_arm.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/MicroByteRTOSBoot.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/MicroByteRTOSInit.cpp
 )
 
 set(MicroByteDal_SRCS
