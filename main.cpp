@@ -8,7 +8,7 @@ DigitalOut led2(PA_3);
 char thread1Stack[0x400];
 MicroByteMutex _mutex;
 
-void *thread1(void *)
+void *thread1Handler(void *)
 {
     while (1)
     {
@@ -25,7 +25,7 @@ int main()
     MicroByteThread::init(thread1Stack, sizeof(thread1Stack),
             MICROBYTE_THREAD_PRIORITY_MAIN - 1,
             MICROBYTE_THREAD_FLAGS_WOUT_YIELD | MICROBYTE_THREAD_FLAGS_STACKMARKER,
-            thread1, NULL, "thread1");
+            thread1Handler, NULL, "thread1");
 
     MicroByteScheduler::get().yield();
 

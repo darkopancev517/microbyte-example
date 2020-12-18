@@ -5,7 +5,7 @@
 extern "C" void mbed_main(void);
 extern int main(void);
 
-void *threadIdle(void *)
+void *threadIdleHandler(void *)
 {
     while (1)
     {
@@ -14,7 +14,7 @@ void *threadIdle(void *)
     return NULL;
 }
 
-void *threadMain(void *)
+void *threadMainHandler(void *)
 {
     mbed_main();
     main();
@@ -38,12 +38,12 @@ void microbyte_rtos_init(void)
     MicroByteThread::init(threadMainStack, sizeof(threadMainStack),
             MICROBYTE_THREAD_PRIORITY_MAIN,
             MICROBYTE_THREAD_FLAGS_WOUT_YIELD | MICROBYTE_THREAD_FLAGS_STACKMARKER,
-            threadMain, NULL, "main");
+            threadMainHandler, NULL, "main");
 
     MicroByteThread::init(threadIdleStack, sizeof(threadIdleStack),
             MICROBYTE_THREAD_PRIORITY_IDLE,
             MICROBYTE_THREAD_FLAGS_WOUT_YIELD | MICROBYTE_THREAD_FLAGS_STACKMARKER,
-            threadIdle, NULL, "idle");
+            threadIdleHandler, NULL, "idle");
 
     microbyte_context_exit();
 }
