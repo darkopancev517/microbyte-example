@@ -6,6 +6,7 @@ project(MicroByteSTM32F407VG)
 ADD_GLOBALDIR(${CMAKE_CURRENT_SOURCE_DIR})
 
 set(MBED_CLASSIC_DIR ${CMAKE_CURRENT_SOURCE_DIR}/microbyte-dal/source/mbed-classic)
+set(MICROBYTE_DAL_DIR ${CMAKE_CURRENT_SOURCE_DIR}/microbyte-dal)
 
 ADD_GLOBALDIR(${MBED_CLASSIC_DIR}/targets/cmsis)
 ADD_GLOBALDIR(${MBED_CLASSIC_DIR}/targets/cmsis/TARGET_STM/TARGET_STM32F4)
@@ -18,9 +19,9 @@ ADD_GLOBALDIR(${MBED_CLASSIC_DIR}/hal)
 ADD_GLOBALDIR(${MBED_CLASSIC_DIR}/common)
 ADD_GLOBALDIR(${MBED_CLASSIC_DIR}/api)
 
-ADD_GLOBALDIR(${CMAKE_CURRENT_SOURCE_DIR}/microbyte-dal/inc/core)
-ADD_GLOBALDIR(${CMAKE_CURRENT_SOURCE_DIR}/microbyte-dal/inc/drivers)
-ADD_GLOBALDIR(${CMAKE_CURRENT_SOURCE_DIR}/microbyte-dal/inc/types)
+ADD_GLOBALDIR(${MICROBYTE_DAL_DIR}/inc/core)
+ADD_GLOBALDIR(${MICROBYTE_DAL_DIR}/inc/drivers)
+ADD_GLOBALDIR(${MICROBYTE_DAL_DIR}/inc/types)
 
 set(MBED_CLASSIC_CMSIS_TARGET_STM32F4_DIR ${MBED_CLASSIC_DIR}/targets/cmsis/TARGET_STM/TARGET_STM32F4)
 set(MBED_CLASSIC_HAL_TARGET_STM32F4_DIR ${MBED_CLASSIC_DIR}/targets/hal/TARGET_STM/TARGET_STM32F4)
@@ -152,6 +153,20 @@ set(MbedClassic_SRCS
 set(Board_SRCS
     ${CMAKE_CURRENT_SOURCE_DIR}/startup_stm32f407xx.S
     ${CMAKE_CURRENT_SOURCE_DIR}/main.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/MicroByteDevice.cpp
+    ${CMAKE_CURRENT_SOURCE_DIR}/mbed_boot_gcc_arm.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/MicroByteRTOSBoot.cpp
+)
+
+set(MicroByteDal_SRCS
+    ${MICROBYTE_DAL_DIR}/source/types/Cib.cpp
+    ${MICROBYTE_DAL_DIR}/source/types/CircList.cpp
+    ${MICROBYTE_DAL_DIR}/source/types/List.cpp
+
+    ${MICROBYTE_DAL_DIR}/source/core/MicroByteEvent.cpp
+    ${MICROBYTE_DAL_DIR}/source/core/MicroByteMsg.cpp
+    ${MICROBYTE_DAL_DIR}/source/core/MicroByteMutex.cpp
+    ${MICROBYTE_DAL_DIR}/source/core/MicroByteThread.cpp
 )
 
 set(PLATFORM_LIBS_SRCS
@@ -165,6 +180,7 @@ add_definitions(-DMBED_OPERATORS)
 
 add_library(MbedClassic STATIC ${MbedClassic_SRCS})
 add_library(Board STATIC ${Board_SRCS})
+add_library(MicroByteDal STATIC ${MicroByteDal_SRCS})
 add_library(PLATFORM_LIBS STATIC ${PLATFORM_LIBS_SRCS})
 
 target_compile_options(MbedClassic
@@ -174,6 +190,6 @@ target_compile_options(MbedClassic
         -Wno-sign-compare
 )
 
-set(PLATFORM_LIBS_List MbedClassic Board)
+set(PLATFORM_LIBS_List MbedClassic MicroByteDal Board)
 add_dependencies(PLATFORM_LIBS ${PLATFORM_LIBS_List})
 target_link_libraries(PLATFORM_LIBS -Wl,--whole-archive ${PLATFORM_LIBS_List} -Wl,--no-whole-archive)

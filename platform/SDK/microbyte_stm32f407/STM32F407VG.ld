@@ -1,3 +1,6 @@
+/* Boot stack size and ISR stack size */
+STACK_SIZE = 0x400;
+
 /* Linker script to configure memory regions. */
 MEMORY
 { 
@@ -146,7 +149,7 @@ SECTIONS
      * size of stack_dummy section */
     __StackTop = ORIGIN(RAM) + LENGTH(RAM);
     _estack = __StackTop;
-    __StackLimit = __StackTop - SIZEOF(.stack_dummy);
+    __StackLimit = __StackTop - STACK_SIZE;
     PROVIDE(__stack = __StackTop);
 
     /* Check if data + heap + stack exceeds RAM limit */
