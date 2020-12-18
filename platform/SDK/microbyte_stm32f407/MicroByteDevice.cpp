@@ -29,8 +29,7 @@ int microbyte_in_isr()
 
 void microbyte_end_of_isr()
 {
-    MicroByteScheduler *scheduler = &MicroByteScheduler::get();
-    if (scheduler->requestedContextSwitch())
+    if (MicroByteScheduler::get().requestedContextSwitch())
     {
         microbyte_trigger_context_switch();
     }
