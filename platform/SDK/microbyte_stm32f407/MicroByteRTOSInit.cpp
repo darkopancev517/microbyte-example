@@ -2,6 +2,9 @@
 #include "MicroByteDevice.h"
 #include "MicroByteThread.h"
 
+char threadMainStack[0x400];
+char threadIdleStack[0x400];
+
 extern "C" void mbed_main(void);
 extern int main(void);
 
@@ -11,7 +14,7 @@ void *threadIdleHandler(void *)
     {
         microbyte_sleep(0);
     }
-    return NULL;
+    return nullptr;
 }
 
 void *threadMainHandler(void *)
@@ -22,28 +25,15 @@ void *threadMainHandler(void *)
     {
         // should not reach here
     }
-    return NULL;
+    return nullptr;
 }
-
-char threadMainStack[0x400];
-char threadIdleStack[0x400];
 
 extern "C"
 void microbyte_rtos_init(void)
 {
     (void) microbyte_disable_irq();
-
     (void) MicroByteScheduler::init();
-
-    MicroByteThread::init(threadMainStack, sizeof(threadMainStack),
-            MICROBYTE_THREAD_PRIORITY_MAIN,
-            MICROBYTE_THREAD_FLAGS_WOUT_YIELD | MICROBYTE_THREAD_FLAGS_STACKMARKER,
-            threadMainHandler, NULL, "main");
-
-    MicroByteThread::init(threadIdleStack, sizeof(threadIdleStack),
-            MICROBYTE_THREAD_PRIORITY_IDLE,
-            MICROBYTE_THREAD_FLAGS_WOUT_YIELD | MICROBYTE_THREAD_FLAGS_STACKMARKER,
-            threadIdleHandler, NULL, "idle");
-
+    MicroByteThread::init(threadMainStack, sizeof(threadMainStack), threadMainHandler, "main");
+    MicroByteThread::init(threadIdleStack, sizeof(threadIdleStack), threadIdleHandler, "idle", MICROBYTE_THREAD_PRIORITY_IDLE);
     microbyte_context_exit();
 }

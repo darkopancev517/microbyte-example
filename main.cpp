@@ -15,17 +15,14 @@ void *thread1Handler(void *)
         led2 = !led2;
         _mutex.lock();
     }
-    return NULL;
+    return nullptr;
 }
 
 int main()
 {
     _mutex = MicroByteMutex();
 
-    MicroByteThread::init(thread1Stack, sizeof(thread1Stack),
-            MICROBYTE_THREAD_PRIORITY_MAIN - 1,
-            MICROBYTE_THREAD_FLAGS_WOUT_YIELD | MICROBYTE_THREAD_FLAGS_STACKMARKER,
-            thread1Handler, NULL, "thread1");
+    MicroByteThread::init(thread1Stack, sizeof(thread1Stack), thread1Handler, "thread1", MICROBYTE_THREAD_PRIORITY_MAIN - 1);
 
     MicroByteScheduler::get().yield();
 

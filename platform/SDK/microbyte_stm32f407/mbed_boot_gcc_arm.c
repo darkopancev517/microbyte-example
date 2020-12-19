@@ -39,6 +39,5 @@ void software_init_hook(void)
     }
 
     mbed_sdk_init();
-
     microbyte_rtos_init();
 }
