@@ -2,13 +2,10 @@
 #include "MicroByteDevice.h"
 #include "MicroByteThread.h"
 
-char threadMainStack[0x400];
-char threadIdleStack[0x400];
-
 extern "C" void mbed_main(void);
 extern int main(void);
 
-void *threadIdleHandler(void *)
+void *threadIdle(void *)
 {
     while (1)
     {
@@ -17,7 +14,7 @@ void *threadIdleHandler(void *)
     return nullptr;
 }
 
-void *threadMainHandler(void *)
+void *threadMain(void *)
 {
     mbed_main();
     main();
@@ -28,12 +25,11 @@ void *threadMainHandler(void *)
     return nullptr;
 }
 
-extern "C"
-void microbyte_rtos_init(void)
+extern "C" void microbyte_rtos_init(void)
 {
     (void) microbyte_disable_irq();
     (void) MicroByteScheduler::init();
-    MicroByteThread::init(threadMainStack, sizeof(threadMainStack), threadMainHandler, "main");
-    MicroByteThread::init(threadIdleStack, sizeof(threadIdleStack), threadIdleHandler, "idle", MICROBYTE_THREAD_PRIORITY_IDLE);
+    MicroByteThread::init(threadMain, "main");
+    MicroByteThread::init(threadIdle, "idle", MICROBYTE_THREAD_PRIORITY_IDLE);
     microbyte_context_exit();
 }

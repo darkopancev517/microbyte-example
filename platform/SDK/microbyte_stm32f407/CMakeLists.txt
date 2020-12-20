@@ -166,6 +166,7 @@ set(MicroByteDal_SRCS
     ${MICROBYTE_DAL_DIR}/source/core/MicroByteMsg.cpp
     ${MICROBYTE_DAL_DIR}/source/core/MicroByteMutex.cpp
     ${MICROBYTE_DAL_DIR}/source/core/MicroByteThread.cpp
+    ${MICROBYTE_DAL_DIR}/source/core/MicroByteHeapAllocator.cpp
 )
 
 set(PLATFORM_LIBS_SRCS
