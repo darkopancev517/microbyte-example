@@ -161,12 +161,18 @@ set(MicroByteDal_SRCS
     ${MICROBYTE_DAL_DIR}/source/types/Cib.cpp
     ${MICROBYTE_DAL_DIR}/source/types/CircList.cpp
     ${MICROBYTE_DAL_DIR}/source/types/List.cpp
+    ${MICROBYTE_DAL_DIR}/source/types/MicroByteCompat.cpp
+    ${MICROBYTE_DAL_DIR}/source/types/ManagedString.cpp
+    ${MICROBYTE_DAL_DIR}/source/types/PacketBuffer.cpp
+    ${MICROBYTE_DAL_DIR}/source/types/RefCounted.cpp
 
     ${MICROBYTE_DAL_DIR}/source/core/MicroByteEvent.cpp
     ${MICROBYTE_DAL_DIR}/source/core/MicroByteMsg.cpp
     ${MICROBYTE_DAL_DIR}/source/core/MicroByteMutex.cpp
     ${MICROBYTE_DAL_DIR}/source/core/MicroByteThread.cpp
     ${MICROBYTE_DAL_DIR}/source/core/MicroByteHeapAllocator.cpp
+    ${MICROBYTE_DAL_DIR}/source/core/MicroByteUtil.cpp
+    ${MICROBYTE_DAL_DIR}/source/core/MicroByteSystemTimer.cpp
 )
 
 set(PLATFORM_LIBS_SRCS
